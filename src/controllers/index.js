@@ -5,4 +5,4 @@
  * ou o resultado das operações bem sucedidas no DB.
  */
 export * as homeController from './home.controller';
-export * as ordersController from './orders.controller';
+export * as certificatesController from './certificates.controller';
