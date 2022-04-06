@@ -23,3 +23,29 @@ export async function saveCertificate(certificate) {
     logger.info(`Error while trying to save certificate`, { error });
   }
 }
+
+export async function updateCertificate(certificateId, changes) {
+  if (!(certificateId && changes)) {
+    return Promise.reject(appError('Failed to update certificate'));
+  }
+
+  try {
+    await Certificate.updateOne({ _id: certificateId }, { ...changes });
+    logger.info(`Certificate ${certificateId} changed`, { changes });
+  } catch (error) {
+    logger.info(`Error while trying to update certificate`, { error });
+  }
+}
+
+export async function removeCertificate(certificateId) {
+  if (!certificateId) {
+    return Promise.reject(appError('Failed to remove certificate'));
+  }
+
+  try {
+    await Certificate.findByIdAndRemove(certificateId);
+    logger.info(`Certificate ${certificateId} removed`);
+  } catch (error) {
+    logger.info(`Error while trying to remove certificate`, { error });
+  }
+}
