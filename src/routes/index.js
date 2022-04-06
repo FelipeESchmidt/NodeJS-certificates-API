@@ -1,15 +1,16 @@
+import '@/database/models';
 import homeRouter from './home.router';
-import ordersRouter from './orders.router';
-import { serviceMiddleware, userMiddleware } from '@/middleware';
+import certificatesRouter from './certificates.router';
+import { serviceMiddleware } from '@/middleware';
 
-const routers = [{ '/': homeRouter }, { '/order': ordersRouter }];
+const routers = [{ '/': homeRouter }, { '/certificates': certificatesRouter }];
 
-const middlewares = [serviceMiddleware.get, userMiddleware.get];
+const middlewares = [serviceMiddleware.get];
 
 export function attachRouters(app) {
   for (const routerObj of routers) {
     const [resource, router] = Object.entries(routerObj)[0];
-    //.....👇🏻 /api/order
+    //.....👇🏻 /api/certificates
     app.use(`/api${resource}`, middlewares, router);
   }
 }

@@ -8,7 +8,7 @@ jest.mock('@/database/service');
 describe('Router > Integration > Home', () => {
   it('should return status 200 and a list of orders', async done => {
     const orders = buildOrders();
-    jest.spyOn(service, 'listOrders').mockResolvedValueOnce(orders);
+    jest.spyOn(service, 'listCertificates').mockResolvedValueOnce(orders);
 
     const res = await buildCall('/api/order');
 
@@ -24,7 +24,7 @@ describe('Router > Integration > Home', () => {
       'Failed to retrieve list of orders',
     );
 
-    jest.spyOn(service, 'listOrders').mockRejectedValueOnce(error);
+    jest.spyOn(service, 'listCertificates').mockRejectedValueOnce(error);
 
     const res = await buildCall('/api/order');
 
@@ -35,7 +35,9 @@ describe('Router > Integration > Home', () => {
   });
 
   it('should return status 200 and the newly created order', async done => {
-    jest.spyOn(service, 'saveOrder').mockResolvedValueOnce({ id: 123456 });
+    jest
+      .spyOn(service, 'saveCertificate')
+      .mockResolvedValueOnce({ id: 123456 });
 
     const res = await buildCall('/api/order', 'post', {
       products: buildOrder(),
@@ -47,13 +49,13 @@ describe('Router > Integration > Home', () => {
     done();
   });
 
-  it('should return status 500 and an error message when saveOrder rejects', async done => {
+  it('should return status 500 and an error message when saveCertificate rejects', async done => {
     const error = buildError(
       StatusCodes.INTERNAL_SERVER_ERROR,
       'Failed to save order',
     );
 
-    jest.spyOn(service, 'saveOrder').mockRejectedValueOnce(error);
+    jest.spyOn(service, 'saveCertificate').mockRejectedValueOnce(error);
 
     const res = await buildCall('/api/order', 'post', {
       products: buildOrder(),

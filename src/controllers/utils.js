@@ -11,3 +11,37 @@ export const validationResponse = (res, errors) => {
   logger.error('Validation failure', { errors: errorList });
   res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ errors: errorList });
 };
+
+export const certificateFiels = [
+  'description',
+  'endDate',
+  'stacks',
+  'title',
+  'imageAlt',
+  'courseImg',
+  'courseUrl',
+  'certificateImg',
+];
+
+export const buildCertificate = reqBody => ({
+  description: reqBody.description,
+  endDate: reqBody.endDate,
+  stacks: reqBody.stacks,
+  title: reqBody.title,
+  imageAlt: reqBody.imageAlt,
+  courseImg: reqBody.courseImg,
+  courseUrl: reqBody.courseUrl,
+  certificateImg: reqBody.certificateImg,
+});
+
+const removeUndefinedInObject = obj => {
+  const o = { ...obj };
+  Object.keys(o).forEach(key => o[key] === undefined && delete o[key]);
+  return o;
+};
+
+export const buildCertificateChanges = reqBody => {
+  const certificate = buildCertificate(reqBody);
+
+  return removeUndefinedInObject(certificate);
+};
