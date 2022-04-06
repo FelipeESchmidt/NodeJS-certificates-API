@@ -1,5 +1,9 @@
 import { body, validationResult } from 'express-validator';
-import { validationResponse } from './utils';
+import {
+  validationResponse,
+  buildCertificate,
+  certificateFiels,
+} from './utils';
 
 export async function index(req, res, next) {
   try {
@@ -24,14 +28,11 @@ export async function create(req, res, next) {
       return;
     }
 
-    const data = {
-      userid: req.user.id,
-      products: JSON.stringify(req.body.products),
-    };
+    const data = buildCertificate(req.body);
 
-    const order = await req.service.saveOrder(data);
+    const certificate = await req.service.saveCertificate(data);
 
-    res.status(200).json({ order: { id: order.id } });
+    res.status(200).json({ certificate: { id: certificate.id } });
   } catch (error) {
     next(error);
   }
@@ -44,7 +45,11 @@ export async function create(req, res, next) {
 export const validate = method => {
   switch (method) {
     case 'create': {
-      return [body('products', `Please provide a list of products`).exists()];
+      return [
+        certificateFiels.map(field =>
+          body(field, `Please provide ${field} field`).exists(),
+        ),
+      ];
     }
     default:
       throw new Error('Unknown method was provided');
