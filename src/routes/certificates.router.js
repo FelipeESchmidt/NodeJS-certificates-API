@@ -8,4 +8,6 @@ export default express
     '/',
     certificatesController.validate('create'),
     certificatesController.create,
-  );
+  )
+  .put('/:id', certificatesController.update)
+  .delete('/:id', certificatesController.remove);
