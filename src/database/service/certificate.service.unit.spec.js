@@ -8,7 +8,7 @@ import {
 } from 'test/builders';
 import { logger } from '@/utils';
 import { Order } from '@/database/models/certificate.model';
-import { listOrders, saveOrder } from './certificate.service';
+import { listCertificates, saveCertificate } from './certificate.service';
 
 jest.mock('@/database/models/order.model');
 jest.mock('@/utils');
@@ -28,7 +28,7 @@ describe('Service > Orders', () => {
 
     jest.spyOn(Order, 'findAll').mockResolvedValueOnce(orders);
 
-    const returnedOrders = await listOrders(user.id);
+    const returnedOrders = await listCertificates(user.id);
 
     expect(returnedOrders).toEqual(orders);
     expect(Order.findAll).toHaveBeenCalledTimes(1);
@@ -45,17 +45,17 @@ describe('Service > Orders', () => {
     jest.spyOn(Order, 'findAll').mockRejectedValueOnce(error);
 
     global.process = { ...process, exit: () => {} };
-    expect(listOrders(user.id)).rejects.toEqual(error);
+    expect(listCertificates(user.id)).rejects.toEqual(error);
     global.process = { ...process, exit: process.exit };
   });
 
-  it('should reject with an error when saveOrder() is called without any data', () => {
+  it('should reject with an error when saveCertificate() is called without any data', () => {
     const error = buildError(
       StatusCodes.INTERNAL_SERVER_ERROR,
       `Failed to save order`,
     );
 
-    expect(saveOrder()).rejects.toEqual(error);
+    expect(saveCertificate()).rejects.toEqual(error);
   });
 
   it('should save and return order', () => {
@@ -71,7 +71,7 @@ describe('Service > Orders', () => {
 
     jest.spyOn(Order, 'create').mockResolvedValueOnce(order);
 
-    expect(saveOrder(data)).resolves.toEqual(order);
+    expect(saveCertificate(data)).resolves.toEqual(order);
     expect(logger.info).toHaveBeenCalledTimes(1);
     expect(logger.info).toHaveBeenCalledWith(`New order saved`, { data });
   });
