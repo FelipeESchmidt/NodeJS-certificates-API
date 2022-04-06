@@ -23,7 +23,7 @@ describe('Controllers > Orders', () => {
     const next = buildNext();
     const orders = buildOrders();
 
-    jest.spyOn(req.service, 'listOrders').mockResolvedValueOnce(orders);
+    jest.spyOn(req.service, 'listCertificates').mockResolvedValueOnce(orders);
 
     await index(req, res, next);
 
@@ -33,8 +33,8 @@ describe('Controllers > Orders', () => {
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith({ orders });
 
-    expect(req.service.listOrders).toHaveBeenCalledTimes(1);
-    expect(req.service.listOrders).toHaveBeenCalledWith(req.user.id);
+    expect(req.service.listCertificates).toHaveBeenCalledTimes(1);
+    expect(req.service.listCertificates).toHaveBeenCalledWith(req.user.id);
   });
 
   it('should forwar an error when service.listOrder fails', async () => {
@@ -46,7 +46,7 @@ describe('Controllers > Orders', () => {
       'Some message here!',
     );
 
-    jest.spyOn(req.service, 'listOrders').mockRejectedValueOnce(error);
+    jest.spyOn(req.service, 'listCertificates').mockRejectedValueOnce(error);
 
     await index(req, res, next);
 
@@ -94,7 +94,7 @@ describe('Controllers > Orders', () => {
     jest.spyOn(validator, 'validationResult').mockReturnValueOnce({
       isEmpty,
     });
-    jest.spyOn(req.service, 'saveOrder').mockResolvedValueOnce({
+    jest.spyOn(req.service, 'saveCertificate').mockResolvedValueOnce({
       id: 2,
     });
 
@@ -111,14 +111,14 @@ describe('Controllers > Orders', () => {
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith({ order: { id: 2 } });
 
-    expect(req.service.saveOrder).toHaveBeenCalledTimes(1);
-    expect(req.service.saveOrder).toHaveBeenCalledWith({
+    expect(req.service.saveCertificate).toHaveBeenCalledTimes(1);
+    expect(req.service.saveCertificate).toHaveBeenCalledWith({
       userid: req.user.id,
       products: JSON.stringify(products),
     });
   });
 
-  it('should forward an error when service.saveOrder fails', async () => {
+  it('should forward an error when service.saveCertificate fails', async () => {
     const products = buildOrders();
     const req = buildReq({ body: { products } });
     const res = buildRes();
@@ -132,7 +132,7 @@ describe('Controllers > Orders', () => {
     jest.spyOn(validator, 'validationResult').mockReturnValueOnce({
       isEmpty,
     });
-    jest.spyOn(req.service, 'saveOrder').mockRejectedValueOnce(error);
+    jest.spyOn(req.service, 'saveCertificate').mockRejectedValueOnce(error);
 
     await create(req, res, next);
 
