@@ -24,14 +24,24 @@ export const certificateFiels = [
 ];
 
 export const buildCertificate = reqBody => ({
-  info: {
-    description: reqBody.description,
-    endDate: reqBody.endDate,
-    stacks: reqBody.stacks,
-    title: reqBody.title,
-  },
+  description: reqBody.description,
+  endDate: reqBody.endDate,
+  stacks: reqBody.stacks,
+  title: reqBody.title,
   imageAlt: reqBody.imageAlt,
   courseImg: reqBody.courseImg,
   courseUrl: reqBody.courseUrl,
   certificateImg: reqBody.certificateImg,
 });
+
+const removeUndefinedInObject = obj => {
+  const o = { ...obj };
+  Object.keys(o).forEach(key => o[key] === undefined && delete o[key]);
+  return o;
+};
+
+export const buildCertificateChanges = reqBody => {
+  const certificate = buildCertificate(reqBody);
+
+  return removeUndefinedInObject(certificate);
+};

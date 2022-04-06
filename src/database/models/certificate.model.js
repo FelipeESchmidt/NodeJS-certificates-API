@@ -2,12 +2,10 @@
 import mongoose from 'mongoose';
 
 const certificateSchema = mongoose.Schema({
-  info: {
-    description: { type: String, required: true },
-    endDate: { type: String, required: true },
-    stacks: [{ type: String }],
-    title: { type: String, required: true },
-  },
+  description: { type: String, required: true },
+  endDate: { type: String, required: true },
+  stacks: [{ type: String }],
+  title: { type: String, required: true },
   imageAlt: { type: String, required: true },
   courseImg: { type: String, required: true },
   courseUrl: { type: String, required: true },
