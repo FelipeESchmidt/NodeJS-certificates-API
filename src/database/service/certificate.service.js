@@ -10,10 +10,16 @@ export async function listCertificates() {
   }
 }
 
-export async function saveOrder(data) {
-  if (!data) {
-    return Promise.reject(appError('Failed to save order'));
+export async function saveCertificate(certificate) {
+  if (!certificate) {
+    return Promise.reject(appError('Failed to save certificate'));
   }
-  logger.info(`New order saved`, { data });
-  return await Order.create(data);
+
+  try {
+    const newCertificate = await Certificate.create(certificate);
+    logger.info(`New certificate saved`, { certificate });
+    return newCertificate;
+  } catch (error) {
+    logger.info(`Error while trying to save certificate`, { error });
+  }
 }
