@@ -8,6 +8,6 @@ dotenv.config();
  * utilizar process.env.DATABASE por exemplo. Isso facilita obter
  * uma referência direta à contante.
  */
-const { DATABASE, PORT, API_SECURITY_KEY } = process.env;
+const { DATABASE, PORT, API_SECURITY, API_SECURITY_KEY } = process.env;
 
-export { DATABASE, PORT, API_SECURITY_KEY };
+export { DATABASE, PORT, API_SECURITY, API_SECURITY_KEY };
