@@ -1,8 +1,8 @@
 import * as validator from 'express-validator';
-import userStub from 'test/stubs/user.json';
-import orderStub from 'test/stubs/order.json';
-import ordersStub from 'test/stubs/orders.json';
-import { appError } from '@/utils';
+import changesStub from 'test/stubs/changes.json';
+import certificateStub from 'test/stubs/certificate.json';
+import certificatesStub from 'test/stubs/certificates.json';
+import { API_SECURITY, appError } from '@/utils';
 import * as service from '@/database/service';
 
 jest.mock('@/database/service');
@@ -11,7 +11,7 @@ export function buildReq({ user = buildUser(), ...overrides } = {}) {
   return {
     user,
     service,
-    headers: { email: user.email },
+    headers: { security: API_SECURITY },
     body: {},
     params: {},
     ...overrides,
@@ -46,20 +46,20 @@ export function buildValidationErrors(condition) {
   return { isEmpty };
 }
 
-export function buildUser() {
-  return userStub;
+export function buildChanges() {
+  return changesStub;
 }
 
-export function buildOrder() {
-  return orderStub;
+export function buildCertificate() {
+  return certificateStub;
 }
 
-export function buildOrders() {
-  return ordersStub;
+export function buildCertificates() {
+  return certificatesStub;
 }
 
-export function buildOrdersStringifyed() {
-  return ordersStub.map(order => {
+export function buildCertificatesStringifyed() {
+  return certificatesStub.map(order => {
     order.products = JSON.stringify(order.products);
     return order;
   });
