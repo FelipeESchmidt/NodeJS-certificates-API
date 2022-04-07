@@ -10,6 +10,6 @@ describe('Controllers > Home', () => {
     expect(res.status).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledTimes(1);
-    expect(res.json).toHaveBeenCalledWith({ welcome: 'Welcome Stranger!' });
+    expect(res.json).toHaveBeenCalledWith({ welcome: 'Welcome to the API!' });
   });
 });
