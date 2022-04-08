@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart": "babel ./src --out-dir build --ignore '**/*.spec.js'",
+    "prestart": "babel-node ./src --out-dir build --ignore '**/*.spec.js'",
     "start": "babel-node ./build/bin/www",
     "dev": "nodemon --exec babel-node ./src/bin/www",
     "lint": "./node_modules/.bin/eslint ./src",
