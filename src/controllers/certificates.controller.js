@@ -28,7 +28,7 @@ export async function create(req, res, next) {
 
     const certificate = await req.service.saveCertificate(data);
 
-    res.status(200).json({ certificate: { id: certificate.id } });
+    res.status(200).json({ certificate: { id: certificate._id } });
   } catch (error) {
     next(error);
   }

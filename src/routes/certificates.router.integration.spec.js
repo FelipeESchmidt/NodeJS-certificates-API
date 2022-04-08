@@ -1,86 +1,165 @@
+import mongoose from 'mongoose';
 import * as service from '@/database/service';
 import { StatusCodes } from 'http-status-codes';
-import { buildError, buildOrder, buildOrders } from 'test/builders';
+import { buildError, buildCertificate, buildCertificates } from 'test/builders';
 import { buildCall } from 'test/builders.integration';
+import { certificateFiels } from '@/controllers/utils';
 
 jest.mock('@/database/service');
 
-describe('Router > Integration > Home', () => {
-  it('should return status 200 and a list of orders', async done => {
-    const orders = buildOrders();
-    jest.spyOn(service, 'listCertificates').mockResolvedValueOnce(orders);
+const finalizeTest = async done => {
+  await mongoose.connection.close();
+  done();
+};
 
-    const res = await buildCall('/api/order');
+describe('Router > Integration > Certificates', () => {
+  describe('GET /api/certificates', () => {
+    it('should return status 200 and a list of certificates', async done => {
+      const certificates = buildCertificates();
+      jest
+        .spyOn(service, 'listCertificates')
+        .mockResolvedValueOnce(certificates);
 
-    expect(res.status).toBe(StatusCodes.OK);
-    expect(res.body).toEqual({ orders });
+      const res = await buildCall('/api/certificates');
 
-    done();
-  });
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({ certificates });
 
-  it('should return status 500 and an error message when listOrder rejects', async done => {
-    const error = buildError(
-      StatusCodes.INTERNAL_SERVER_ERROR,
-      'Failed to retrieve list of orders',
-    );
-
-    jest.spyOn(service, 'listCertificates').mockRejectedValueOnce(error);
-
-    const res = await buildCall('/api/order');
-
-    expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(res.body).toEqual({ message: 'Failed to retrieve list of orders' });
-
-    done();
-  });
-
-  it('should return status 200 and the newly created order', async done => {
-    jest
-      .spyOn(service, 'saveCertificate')
-      .mockResolvedValueOnce({ id: 123456 });
-
-    const res = await buildCall('/api/order', 'post', {
-      products: buildOrder(),
+      await finalizeTest(done);
     });
 
-    expect(res.status).toBe(StatusCodes.OK);
-    expect(res.body).toEqual({ order: { id: 123456 } });
+    it('should return status 500 and an error message when listCertificates rejects', async done => {
+      const error = buildError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Failed to retrieve list of certificates',
+      );
 
-    done();
+      jest.spyOn(service, 'listCertificates').mockRejectedValueOnce(error);
+
+      const res = await buildCall('/api/certificates');
+
+      expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(res.body).toEqual({
+        message: 'Failed to retrieve list of certificates',
+      });
+
+      await finalizeTest(done);
+    });
   });
 
-  it('should return status 500 and an error message when saveCertificate rejects', async done => {
-    const error = buildError(
-      StatusCodes.INTERNAL_SERVER_ERROR,
-      'Failed to save order',
-    );
+  describe('POST /api/certificates', () => {
+    it('should return status 200 and the newly created certificate id', async done => {
+      const certificate = buildCertificate();
+      jest.spyOn(service, 'saveCertificate').mockResolvedValueOnce(certificate);
 
-    jest.spyOn(service, 'saveCertificate').mockRejectedValueOnce(error);
+      const res = await buildCall('/api/certificates', 'post', {
+        ...certificate,
+      });
 
-    const res = await buildCall('/api/order', 'post', {
-      products: buildOrder(),
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({ certificate: { id: certificate._id } });
+
+      await finalizeTest(done);
     });
 
-    expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
-    expect(res.body).toEqual({ message: 'Failed to save order' });
+    it('should return status 500 and an error message when saveCertificate rejects', async done => {
+      const certificate = buildCertificate();
+      const error = buildError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Failed to save certificate',
+      );
 
-    done();
+      jest.spyOn(service, 'saveCertificate').mockRejectedValueOnce(error);
+
+      const res = await buildCall('/api/certificates', 'post', {
+        ...certificate,
+      });
+
+      expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(res.body).toEqual({ message: 'Failed to save certificate' });
+
+      await finalizeTest(done);
+    });
+
+    it('should return status 422 and an error message when validation erros are returned', async done => {
+      const res = await buildCall('/api/certificates', 'post');
+
+      expect(res.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);
+      expect(res.body.errors).toHaveLength(certificateFiels.length);
+
+      await finalizeTest(done);
+    });
   });
 
-  it('should return status 422 and an error message when validation erros are returned', async done => {
-    const res = await buildCall('/api/order', 'post');
+  describe('PUT /api/certificates/:id', () => {
+    it('should return status 200', async done => {
+      const certificate = buildCertificate();
+      jest.spyOn(service, 'updateCertificate').mockResolvedValueOnce();
 
-    expect(res.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);
-    expect(res.body).toEqual({
-      errors: [
-        {
-          location: 'body',
-          msg: 'Please provide a list of products',
-          param: 'products',
-        },
-      ],
+      const res = await buildCall(
+        `/api/certificates/${certificate._id}`,
+        'put',
+      );
+
+      expect(res.status).toBe(StatusCodes.OK);
+
+      await finalizeTest(done);
     });
 
-    done();
+    it('should return status 500 and an error message when updateCertificate rejects', async done => {
+      const certificate = buildCertificate();
+      const error = buildError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Failed to update certificate',
+      );
+
+      jest.spyOn(service, 'updateCertificate').mockRejectedValueOnce(error);
+
+      const res = await buildCall(
+        `/api/certificates/${certificate._id}`,
+        'put',
+      );
+
+      expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(res.body).toEqual({ message: 'Failed to update certificate' });
+
+      await finalizeTest(done);
+    });
+  });
+
+  describe('DELETE /api/certificates/:id', () => {
+    it('should return status 200', async done => {
+      const certificate = buildCertificate();
+      jest.spyOn(service, 'removeCertificate').mockResolvedValueOnce();
+
+      const res = await buildCall(
+        `/api/certificates/${certificate._id}`,
+        'delete',
+      );
+
+      expect(res.status).toBe(StatusCodes.OK);
+
+      await finalizeTest(done);
+    });
+
+    it('should return status 500 and an error message when removeCertificate rejects', async done => {
+      const certificate = buildCertificate();
+      const error = buildError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Failed to remove certificate',
+      );
+
+      jest.spyOn(service, 'removeCertificate').mockRejectedValueOnce(error);
+
+      const res = await buildCall(
+        `/api/certificates/${certificate._id}`,
+        'delete',
+      );
+
+      expect(res.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(res.body).toEqual({ message: 'Failed to remove certificate' });
+
+      await finalizeTest(done);
+    });
   });
 });

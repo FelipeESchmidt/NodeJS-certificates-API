@@ -1,7 +1,12 @@
 import { logger } from '@/utils/logger';
 import { StatusCodes } from 'http-status-codes';
-import { buildRes } from 'test/builders';
-import { validationResponse } from './utils';
+import { buildCertificate as stubCertificate, buildRes } from 'test/builders';
+import {
+  validationResponse,
+  buildCertificate,
+  certificateFiels,
+  buildCertificateChanges,
+} from './utils';
 
 jest.mock('@/utils/logger');
 
@@ -26,5 +31,27 @@ describe('Controllers > Utils', () => {
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith({ errors: ['error1', 'error2'] });
     expect(errors.array).toHaveBeenCalledTimes(1);
+  });
+
+  it('should mount correct certificate', () => {
+    const certificate = stubCertificate();
+
+    const buildedCertificate = buildCertificate(certificate);
+
+    expect(certificate._id).toBeDefined();
+    expect(buildedCertificate._id).toBeUndefined();
+
+    expect(Object.keys(buildedCertificate)).toHaveLength(
+      certificateFiels.length,
+    );
+  });
+
+  it('should mount correct certificate changes', () => {
+    const { title, description } = stubCertificate();
+    const changes = { title, description };
+
+    const buildedCertificate = buildCertificateChanges(changes);
+
+    expect(Object.keys(buildedCertificate)).toHaveLength(2);
   });
 });

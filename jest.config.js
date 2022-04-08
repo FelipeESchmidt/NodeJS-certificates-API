@@ -1,5 +1,7 @@
 module.exports = {
-  testPathIgnorePatterns: [ '<rootDir>/node_modules/', '<rootDir>/build/' ],
+  testEnvironment: 'node',
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/build/'],
   transform: {
     '^.+\\.(js|ts)$': '<rootDir>/node_modules/babel-jest',
   },
@@ -8,9 +10,7 @@ module.exports = {
     '^test/(.*)$': '<rootDir>/test/$1',
   },
   roots: ['src'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.js',
-  ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.js'],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

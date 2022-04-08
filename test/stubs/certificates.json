@@ -1,0 +1,66 @@
+[
+  {
+    "certificateImg": "https://cursos.dankicode.com/certificados?view=3428",
+    "courseImg": "https://cursos.dankicode.com/app/Views/public/images/uploads/cursos/599083332ff1a.png",
+    "courseUrl": "https://cursos.dankicode.com/curso-front-end-completo",
+    "_id": "624e25bb02aea5a3b2bdd8dd",
+    "imageAlt": "Curso WebMaster Front-End Completo",
+    "description": "Danki Code - Aprenda e domine absolutamente tudo sobre front-end e web design em apenas um curso! Tudo que você precisa para se tornar um(a) Desenvolvedor(a) Front-End.",
+    "endDate": "10/02/2021",
+    "stacks": ["HTML", "CSS", "Javascript", "JQuery", "Sass", "Less"],
+    "title": "Curso WebMaster Front-End Completo"
+  },
+  {
+    "certificateImg": "https://uploaddeimagens.com.br/imagens/inJSRxQ",
+    "courseImg": "https://programador.onebitcode.com/images/share-fb.png",
+    "courseUrl": "https://programador.onebitcode.com/",
+    "_id": "624e25be02aea5a3b2bdd8df",
+    "imageAlt": "Programador Full Stack JavaScript PRO",
+    "description": "OneBitCode - Planejamento completo: Desenho dos mockups, Projeção do banco de dados e Projeção dos Endpoits. Criação da API NodeJs. Criação do cliente Web com React. Teste da integração entre a API e o cliente. Deploy (deixando o serviço online).",
+    "endDate": "18/03/2022",
+    "stacks": [
+      "HTML",
+      "CSS",
+      "Javascript",
+      "Typescript",
+      "React",
+      "MongoDB",
+      "NodeJS",
+      "ExpressJS"
+    ],
+    "title": "Programador Full Stack JavaScript PRO"
+  },
+  {
+    "certificateImg": "a",
+    "courseImg": "https://classes.vedovelli.com.br/simon-abrams-k_T9Zj3SE8k-unsplash.jpg",
+    "courseUrl": "https://javascript.tv.br/",
+    "_id": "624e32b996f2d3da0f678c49",
+    "imageAlt": "Aprenda a testar Aplicações Javascript",
+    "description": "Vedovelli - Um curso abrangente sobre testes no ecossistema Javascript. Você verá como testar desde simples libs utilitárias, passando por uma API REST e finalmente chegando no front end, com Jest e Cypress.",
+    "endDate": "XX/XX/2022",
+    "stacks": [
+      "Javascript",
+      "Jest",
+      "MirageJS",
+      "Faker",
+      "Nuxt",
+      "VueJS",
+      "Next",
+      "React",
+      "Babel",
+      "Prettier"
+    ],
+    "title": "Aprenda a testar Aplicações Javascript"
+  },
+  {
+    "certificateImg": "https://www.udemy.com/certificate/UC-4324c72f-7b47-4cfd-9870-b77c41859563/",
+    "courseImg": "https://img-c.udemycdn.com/course/240x135/1691424_acf4_6.jpg",
+    "courseUrl": "https://www.udemy.com/course/learn-puppet/",
+    "_id": "624e349296f2d3da0f678c52",
+    "imageAlt": "Puppet for the Absolute Beginners",
+    "description": "Udemy - This course introduces a beginner to basic fundamentals of Puppet with easy to do hands-on exercises that you can practice right in the browser. The course introduces basic use cases of Puppet followed by an introduction to Puppet Setup, Architecture, Puppet Resources, Classes, Manifests, Profiles, Facts etc.",
+    "endDate": "30/03/2022",
+    "stacks": ["Puppet", "Bash", "Linux", "AWS Cloud Deploy"],
+    "title": "Puppet for the Absolute Beginners - Hands-on - DevOps."
+  }
+]

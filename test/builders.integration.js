@@ -1,15 +1,9 @@
-import * as service from '@/database/service';
-import app from '@/app';
 import supertest from 'supertest';
-import { buildUser } from './builders';
+import app from '@/app';
+import { API_SECURITY } from '@/utils';
 
-jest.mock('@/database/service');
-
-export function buildCall(endpoint, method = 'get', body = null) {
-  const user = buildUser();
+export async function buildCall(endpoint, method = 'get', body = null) {
   const request = supertest(app);
 
-  jest.spyOn(service, 'findOrSave').mockResolvedValue([user]);
-
-  return request[method](endpoint).send(body).set('email', user.email);
+  return request[method](endpoint).send(body).set('security', API_SECURITY);
 }

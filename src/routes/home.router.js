@@ -1,4 +1,6 @@
 import express from 'express';
 import { homeController } from '@/controllers';
 
-export default express.Router().get('/', homeController.index);
+const routes = express.Router().get('/', homeController.index);
+
+export default routes;
