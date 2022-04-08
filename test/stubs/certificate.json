@@ -4,19 +4,17 @@
   "courseUrl": "https://programador.onebitcode.com/",
   "_id": "624e25be02aea5a3b2bdd8df",
   "imageAlt": "Programador Full Stack JavaScript PRO",
-  "info": {
-    "description": "OneBitCode - Planejamento completo: Desenho dos mockups, Projeção do banco de dados e Projeção dos Endpoits. Criação da API NodeJs. Criação do cliente Web com React. Teste da integração entre a API e o cliente. Deploy (deixando o serviço online).",
-    "endDate": "18/03/2022",
-    "stacks": [
-      "HTML",
-      "CSS",
-      "Javascript",
-      "Typescript",
-      "React",
-      "MongoDB",
-      "NodeJS",
-      "ExpressJS"
-    ],
-    "title": "Programador Full Stack JavaScript PRO"
-  }
+  "description": "OneBitCode - Planejamento completo: Desenho dos mockups, Projeção do banco de dados e Projeção dos Endpoits. Criação da API NodeJs. Criação do cliente Web com React. Teste da integração entre a API e o cliente. Deploy (deixando o serviço online).",
+  "endDate": "18/03/2022",
+  "stacks": [
+    "HTML",
+    "CSS",
+    "Javascript",
+    "Typescript",
+    "React",
+    "MongoDB",
+    "NodeJS",
+    "ExpressJS"
+  ],
+  "title": "Programador Full Stack JavaScript PRO"
 }
