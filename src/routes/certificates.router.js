@@ -2,7 +2,7 @@ import express from 'express';
 import { certificatesController } from '@/controllers';
 import { guaranteeSecurity } from '@/middleware/security.middleware';
 
-export default express
+const routes = express
   .Router()
   .get('/', certificatesController.index)
   .post(
@@ -13,3 +13,5 @@ export default express
   )
   .put('/:id', guaranteeSecurity, certificatesController.update)
   .delete('/:id', guaranteeSecurity, certificatesController.remove);
+
+export default routes;
