@@ -7,9 +7,8 @@ import * as service from '@/database/service';
 
 jest.mock('@/database/service');
 
-export function buildReq({ user = buildUser(), ...overrides } = {}) {
+export function buildReq({ ...overrides } = {}) {
   return {
-    user,
     service,
     headers: { security: API_SECURITY },
     body: {},
