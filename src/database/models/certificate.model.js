@@ -10,6 +10,7 @@ const certificateSchema = mongoose.Schema({
   courseImg: { type: String, required: true },
   courseUrl: { type: String, required: true },
   certificateImg: { type: String, required: true },
+  percentage: { type: Number, required: true },
 });
 
 module.exports = mongoose.model('Certificate', certificateSchema);
