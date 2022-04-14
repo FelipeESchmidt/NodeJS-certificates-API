@@ -8,7 +8,8 @@
     "description": "Danki Code - Aprenda e domine absolutamente tudo sobre front-end e web design em apenas um curso! Tudo que você precisa para se tornar um(a) Desenvolvedor(a) Front-End.",
     "endDate": "10/02/2021",
     "stacks": ["HTML", "CSS", "Javascript", "JQuery", "Sass", "Less"],
-    "title": "Curso WebMaster Front-End Completo"
+    "title": "Curso WebMaster Front-End Completo",
+    "percentage": 35
   },
   {
     "certificateImg": "https://uploaddeimagens.com.br/imagens/inJSRxQ",
@@ -28,7 +29,8 @@
       "NodeJS",
       "ExpressJS"
     ],
-    "title": "Programador Full Stack JavaScript PRO"
+    "title": "Programador Full Stack JavaScript PRO",
+    "percentage": 45
   },
   {
     "certificateImg": "a",
@@ -50,7 +52,8 @@
       "Babel",
       "Prettier"
     ],
-    "title": "Aprenda a testar Aplicações Javascript"
+    "title": "Aprenda a testar Aplicações Javascript",
+    "percentage": 80
   },
   {
     "certificateImg": "https://www.udemy.com/certificate/UC-4324c72f-7b47-4cfd-9870-b77c41859563/",
@@ -61,6 +64,7 @@
     "description": "Udemy - This course introduces a beginner to basic fundamentals of Puppet with easy to do hands-on exercises that you can practice right in the browser. The course introduces basic use cases of Puppet followed by an introduction to Puppet Setup, Architecture, Puppet Resources, Classes, Manifests, Profiles, Facts etc.",
     "endDate": "30/03/2022",
     "stacks": ["Puppet", "Bash", "Linux", "AWS Cloud Deploy"],
-    "title": "Puppet for the Absolute Beginners - Hands-on - DevOps."
+    "title": "Puppet for the Absolute Beginners - Hands-on - DevOps.",
+    "percentage": 100
   }
 ]
