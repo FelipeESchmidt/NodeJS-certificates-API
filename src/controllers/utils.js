@@ -21,6 +21,7 @@ export const certificateFiels = [
   'courseImg',
   'courseUrl',
   'certificateImg',
+  'percentage',
 ];
 
 export const buildCertificate = reqBody => ({
@@ -32,6 +33,7 @@ export const buildCertificate = reqBody => ({
   courseImg: reqBody.courseImg,
   courseUrl: reqBody.courseUrl,
   certificateImg: reqBody.certificateImg,
+  percentage: reqBody.percentage,
 });
 
 const removeUndefinedInObject = obj => {
